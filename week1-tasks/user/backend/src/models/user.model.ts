@@ -32,7 +32,8 @@ const userSchema = new Schema<IUser,UserModel,IUserMethods>({
     },
     password:{
         type: String,
-        required:true
+        required:true,
+        select:false
     },
     refreshToken:{
         token: {

@@ -14,6 +14,16 @@ export const userAuthentication = (request:Request,response:Response,next:NextFu
                 .json(new ApiError(401,"you are not authenticated",["token not received"]));
     }
     else {
+        // checking for unnecessary token..
+        const path = request.route.path.split("/");
+        if(path.includes("login")) {
+            response
+                .status(400)
+                .json(new ApiError(400,"you are already logged-in",["user already loggedin to there account"]));
+            return;
+
+        }
+
         const decodeToken = jwt.verify(incomingToken,process.env.JWT_SECRET_KEY as string);
         if(!decodeToken) {
             response
@@ -26,3 +36,4 @@ export const userAuthentication = (request:Request,response:Response,next:NextFu
         next();
     }
 }
+

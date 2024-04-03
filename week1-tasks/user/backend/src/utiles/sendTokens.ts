@@ -2,7 +2,6 @@ import {User} from "../models/user.model.js";
 import {ApiError} from "./ApiError.js";
 import {ApiResponse} from "./ApiResponse.js";
 import {Response} from "express";
-import {markAsUntransferable} from "node:worker_threads";
 
 const sendTokens = async (user:any,response:Response) => {
     try{
@@ -25,7 +24,7 @@ const sendTokens = async (user:any,response:Response) => {
                 secure:true,
                 sameSite:'lax'
             })
-            .json(new ApiResponse(201,"user created successfully",{user:user,accessToken:accessToken,refreshToken:refreshToken}))
+            .json(new ApiResponse(201,"user account managed successfully",{user:user,accessToken:accessToken,refreshToken:refreshToken}))
 
     } catch (error) {
         throw new ApiError(500,"sendTokens error",error as Array<string>);
