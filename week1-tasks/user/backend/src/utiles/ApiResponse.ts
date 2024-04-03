@@ -1,7 +1,7 @@
 
  export class ApiResponse {
     private statusCode:number;
-    private message:string;
+    private message:unknown;
     private data:unknown;
     private success:boolean;
 

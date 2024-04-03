@@ -3,6 +3,7 @@ import {config} from "dotenv";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import {userRouter} from "../routes/user.route.js";
 
 config({
      path:'src/environmentVariables/.env',
@@ -37,5 +38,6 @@ app.options('*',(request:Request,response:Response) => {
      response.sendStatus(200);
 })
 
+app.use('/api/v1',userRouter);
 
 export {app};

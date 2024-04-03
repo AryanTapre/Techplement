@@ -2,6 +2,7 @@ import {app} from "./config/app.js";
 import {connectDB, ConnectionObject} from "./config/database.js";
 import {ApiError} from "./utiles/ApiError.js";
 
+
 const connectionState:Promise<ConnectionObject> = connectDB();
 connectionState
     .then((response:ConnectionObject) => {
@@ -14,7 +15,7 @@ connectionState
         })
     })
     .catch((response:ConnectionObject) => {
-        console.log(`failed to connect to database server:${response}`);
+        throw new ApiError(500,"failed to connect to database server",[response])
     })
 
 
