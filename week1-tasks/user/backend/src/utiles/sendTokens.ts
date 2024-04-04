@@ -1,14 +1,18 @@
-import {User} from "../models/user.model.js";
+import {IUser, User} from "../models/user.model.js";
 import {ApiError} from "./ApiError.js";
 import {ApiResponse} from "./ApiResponse.js";
 import {Response} from "express";
+import {HydratedDocument} from  "mongoose";
 
 const sendTokens = async (user:any,response:Response) => {
     try{
+        //@ts-ignore
         const accessToken = user.generateAccessToken();
+        //@ts-ignore
         const refreshToken = user.generateRefreshToken();
+        //@ts-ignore
         await user.save({validateBeforeSave:false});
-
+        //@ts-ignore
         user.password = undefined;
         response
             .status(201)

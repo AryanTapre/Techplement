@@ -3,26 +3,18 @@ import {ApiError} from "../utiles/ApiError.js";
 import {NextFunction, Request, Response} from "express";
 
 export const userAuthentication = (request:Request,response:Response,next:NextFunction) => {
+    console.log("inside user auth");
                             //@ts-ignore
-    const incomingToken =   request.cookies.accessToken ||
+    const incomingToken =   request.cookies?.accessToken ||
                             request.header("Authorization")?.replace("Bearer ","") ||
                             request.body.accessToken;
 
-    if(!incomingToken) {
+    if((!incomingToken)) {
             response
                 .status(401)
                 .json(new ApiError(401,"you are not authenticated",["token not received"]));
     }
     else {
-        // checking for unnecessary token..
-        const path = request.route.path.split("/");
-        if(path.includes("login")) {
-            response
-                .status(400)
-                .json(new ApiError(400,"you are already logged-in",["user already loggedin to there account"]));
-            return;
-
-        }
 
         const decodeToken = jwt.verify(incomingToken,process.env.JWT_SECRET_KEY as string);
         if(!decodeToken) {

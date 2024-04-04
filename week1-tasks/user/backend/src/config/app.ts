@@ -1,4 +1,4 @@
-import express,{Express,Request,Response} from "express";
+import express, {Express, Request, Response} from "express";
 import {config} from "dotenv";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -10,6 +10,9 @@ config({
 })
 
 const app:Express = express();
+
+
+app.use(express.static("public"));
 
 app.use(express.json({
      limit:'200mb'

@@ -3,27 +3,27 @@ import bcryptjs from "bcryptjs"
 import crypto from "crypto";
 import jwt from 'jsonwebtoken';
 
-interface IUser {
+export interface IUser {
     email:string;
     password:string;
     refreshToken: {
         token:string;
         revoke:boolean;
     };
-    profilePhoto:Buffer;
+    profilePhoto:string;
     address:string;
     dob:Date;
     createdAt:Date;
     updatedAt:Date;
 }
 
-interface IUserMethods {
+export interface IUserMethods {
     validatePassword(userPassword:string):Promise<boolean>;
     generateAccessToken():any;
     generateRefreshToken():any;
 }
 
-type UserModel = Model<IUser,{},IUserMethods>;
+export type UserModel = Model<IUser,{},IUserMethods>;
 
 const userSchema = new Schema<IUser,UserModel,IUserMethods>({
     email: {
@@ -44,7 +44,7 @@ const userSchema = new Schema<IUser,UserModel,IUserMethods>({
         }
     },
     profilePhoto: {
-        type:Buffer
+        type:String
     },
     address: {
         type:String,
