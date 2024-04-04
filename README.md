@@ -33,7 +33,7 @@
         {
             "address":"any",
             "dob":"2024-03-03"
-            "profilePhoto": file,
+            "profilePhoto": "any file",
         }
         
     ```
